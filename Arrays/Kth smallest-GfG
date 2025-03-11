@@ -1,0 +1,49 @@
+import java.util.*;
+
+public class KthSmallest {
+    public static int findKthSmallest(int[] arr, int k) {
+        int maxVal = 1000000; // Given constraint (1 ≤ arr[i] ≤ 10^6)
+        int[] freq = new int[maxVal + 1]; // Frequency array
+        
+        // Count occurrences of each number
+        for (int num : arr) {
+            freq[num]++;
+        }
+        
+        // Find the kth smallest element
+        int count = 0;
+        for (int i = 1; i <= maxVal; i++) {
+            if (freq[i] > 0) {
+                count += freq[i];
+                if (count >= k) return i;
+            }
+        }
+        
+        return -1; // This should never be reached if input is valid
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        // User input handling
+        System.out.print("Enter the size of array: ");
+        int n = sc.nextInt();
+        int[] arr = new int[n];
+
+        System.out.println("Enter array elements: ");
+        for (int i = 0; i < n; i++) {
+            arr[i] = sc.nextInt();
+        }
+
+        System.out.print("Enter k: ");
+        int k = sc.nextInt();
+        
+        if (k < 1 || k > n) {
+            System.out.println("Invalid k value!");
+        } else {
+            System.out.println("Kth smallest element: " + findKthSmallest(arr, k));
+        }
+        
+        sc.close();
+    }
+}
