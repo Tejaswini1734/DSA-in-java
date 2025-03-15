@@ -1,0 +1,28 @@
+// O(N) Time complexity 
+class Solution {
+    public int[] smallerNumbersThanCurrent(int[] nums) {
+        int[] count = new int[101];  // Assuming numbers are between 0 and 100
+        int[] result = new int[nums.length];
+
+        // Step 1: Count the frequency of each number in the nums array
+        for (int num : nums) {
+            count[num]++;
+        }
+
+        // Step 2: Create a prefix sum array to count how many numbers are smaller than each number
+        for (int i = 1; i < 101; i++) {
+            count[i] += count[i - 1];
+        }
+
+        // Step 3: Fill the result array by using the prefix sum array
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] == 0) {
+                result[i] = 0;
+            } else {
+                result[i] = count[nums[i] - 1];  // The number of smaller elements is count[nums[i] - 1]
+            }
+        }
+
+        return result;
+    }
+}
