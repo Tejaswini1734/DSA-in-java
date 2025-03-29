@@ -1,0 +1,5 @@
+# Ignore system directories
+AppData/
+.DS_Store
+Thumbs.db
+*.log
